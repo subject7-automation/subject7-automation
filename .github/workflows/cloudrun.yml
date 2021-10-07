@@ -3,11 +3,7 @@
 name: Subject7 Execution
 on:
   workflow_dispatch:
-    inputs:
-      name:
-        description: 'Subject7 Cloud Run'
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
+  jobs:
   # This workflow contains a single job called "subject7run"
   subject7run:
     # The type of runner that the job will run on
