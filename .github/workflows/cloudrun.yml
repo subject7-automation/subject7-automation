@@ -1,15 +1,25 @@
 # This is a basic workflow that is manually triggered
 
-name: Subject7 Execution
+name: Subject7 Execution Run
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
 on:
   workflow_dispatch:
-  inputs:
+    # Inputs the workflow accepts.
+    inputs:
       name:
-      description: 'Subject7 Cloud Run'
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Cloud Run'
+        # Default value if no value is explicitly provided
+        default: 'World'
+        # Input has to be provided for the workflow to run
+        required: false
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-  jobs:
-  # This workflow contains a single job called "subject7run"
-  subject7run:
+jobs:
+  # This workflow contains a single job called "subject7"
+  subject7:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
