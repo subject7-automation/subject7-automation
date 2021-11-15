@@ -10,24 +10,19 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "subject7"
-  subject7:
-    # The type of runner that the job will run on
+ job-a:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    outputs:
+       id: ${{ steps.vars.outputs.id }}
     steps:
-    # Runs a single command using the runners shell
-    
     - name: Cloud Run execution of Subject7 test cases
       id: vars
       run: |
-       echo "exe=curl -X POST "https://platform.subject-7.com/api/v2/executions" -H  "accept: application/json" -H  "Authorization: Basic YW11dGhhOkBXU1gxcWF6" -H  "Content-Type: application/json" -d "{\"name\":\"Regression_Test_Web\",\"configuration\":{\"pool\":\"win10\",\"buildNumber\":\"4.11.21\",\"browserTypes\":[\"CHROME\"],\"videoCaption\":true,\"delay\":10,\"rotations\":1,\"runtimeSpeed\":1000,\"callbackArgs\":null,\"dataSetSelection\":[{\"testCaseName\":\"Reference_Web_Application\",\"templateName\":\"Users\",\"dataSetNames\":[\"admin\"]}]}}"" > at.json
-   
-    - name: Cloud Run
-      run: |
-       echo "id= $(jq '.id' at.json)" >> $GITHUB_ENV
-  
-    - name: Cloud Run
-      run: |
-       echo "${{ env.id }}"
+       exe=$(curl -X POST "https://platform.subject-7.com/api/v2/executions" -H  "accept: application/json" -H  "Authorization: Basic YW11dGhhOkBXU1gxcWF6" -H  "Content-Type: application/json" -d "{\"name\":\"Regression_Test_Web\",\"configuration\":{\"pool\":\"win10\",\"buildNumber\":\"4.11.21\",\"browserTypes\":[\"CHROME\"],\"videoCaption\":true,\"delay\":10,\"rotations\":1,\"runtimeSpeed\":1000,\"callbackArgs\":null,\"dataSetSelection\":[{\"testCaseName\":\"Reference_Web_Application\",\"templateName\":\"Users\",\"dataSetNames\":[\"admin\"]}]}}"" | jq '.id' )
+       echo "::set-output id=$exe"
+       
+ job-b:
+    runs-on: ubuntu-latest
+    needs: job-a
+    steps:
+      - run: echo ${{ needs.job-a.outputs.id }}
