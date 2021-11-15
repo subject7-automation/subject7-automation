@@ -16,5 +16,5 @@ jobs:
         echo ::set-output name=foo::"$(curl -X GET "https://platform.subject-7.com/api/v2/executions/${{steps.latestrelease.outputs.tag}}" -H  "accept: application/json" -H  "Authorization: Basic YW11dGhhOkBXU1gxcWF6" | jq '.executionStatus' )"
     - name: Cloud Run status
       run: |
-        echo ${{steps.latestrelease.outputs.foo}}
+        echo "The result is ${{steps.latestrelease.outputs.foo}}"
  
