@@ -6,6 +6,7 @@ name: Subject7 Execution Run
 # or API.
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
   pull_request:
