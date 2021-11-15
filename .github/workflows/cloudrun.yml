@@ -6,8 +6,8 @@ on:
 jobs:
  job-a:
     runs-on: ubuntu-latest
-    outputs:
-      crashers-count: ${{ steps.latestrelease.outputs.* }}
+    env:
+     msg: ${{ (steps.latestrelease.outputs.*, '\n')}}
     steps:
     - name: Cloud Run execution of Subject7 test cases
       id: latestrelease
