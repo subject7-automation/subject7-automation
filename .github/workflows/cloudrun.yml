@@ -18,5 +18,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
+    
     - name: Cloud Run execution of Subject7 test cases
+      id: vars
       run: 'curl -X POST "https://platform.subject-7.com/api/v2/executions" -H  "accept: application/json" -H  "Authorization: Basic YW11dGhhOkBXU1gxcWF6" -H  "Content-Type: application/json" -d "{\"name\":\"Regression_Test_Web\",\"configuration\":{\"pool\":\"win10\",\"buildNumber\":\"4.11.21\",\"browserTypes\":[\"CHROME\"],\"videoCaption\":true,\"delay\":10,\"rotations\":1,\"runtimeSpeed\":1000,\"callbackArgs\":null,\"dataSetSelection\":[{\"testCaseName\":\"Reference_Web_Application\",\"templateName\":\"Users\",\"dataSetNames\":[\"admin\"]}]}}"'
+      echo: steps.vars.output.*
+      
