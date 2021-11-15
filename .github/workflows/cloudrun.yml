@@ -14,7 +14,7 @@ jobs:
     - name: Cloud Run execution of Subject7 test
       id: result
       run: |
-        echo ::set-output name=foo::"$(curl -X GET "https://platform.subject-7.com/api/v2/executions/${{steps.executionset.outputs.tag}}" -H  "accept: application/json" -H  "Authorization: Basic YW11dGhhOkBXU1gxcWF6" | jq '.id' )"
+        echo ::set-output name=foo::"$(curl -X GET "https://platform.subject-7.com/api/v2/executions/${{steps.executionset.outputs.tag}}" -H  "accept: application/json" -H  "Authorization: Basic YW11dGhhOkBXU1gxcWF6" | jq '.executionStatus' )"
     - name: Cloud Run status
       run: |
         echo "The result is ${{steps.result.outputs.foo}}"
