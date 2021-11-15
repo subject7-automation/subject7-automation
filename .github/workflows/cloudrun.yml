@@ -14,5 +14,5 @@ jobs:
     - name: Cloud Run execution of Subject7 test
       run: |
         echo ::set-output name=foo::"$(curl -X GET "https://platform.subject-7.com/api/v2/executions/${{steps.latestrelease.outputs.tag}}" -H  "accept: application/json" -H  "Authorization: Basic YW11dGhhOkBXU1gxcWF6" | jq '.executionStatus' )"
-        if [ $foo="PASS" ]
+        if [ ${{steps.latestrelease.outputs.foo}}="PASS" ]
         then echo Pass
