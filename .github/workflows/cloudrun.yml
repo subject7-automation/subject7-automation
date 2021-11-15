@@ -8,13 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Cloud Run execution of Subject7 test cases
-      id: latestrelease
+      id: executionset
       run: |
         echo ::set-output name=tag::"$(curl -X POST "https://platform.subject-7.com/api/v2/executions" -H  "accept: application/json" -H  "Authorization: Basic YW11dGhhOkBXU1gxcWF6" -H  "Content-Type: application/json" -d "{\"name\":\"Regression_Test_Web\",\"configuration\":{\"pool\":\"win10\",\"buildNumber\":\"4.11.21\",\"browserTypes\":[\"CHROME\"],\"videoCaption\":true,\"delay\":10,\"rotations\":1,\"runtimeSpeed\":1000,\"callbackArgs\":null,\"dataSetSelection\":[{\"testCaseName\":\"Reference_Web_Application\",\"templateName\":\"Users\",\"dataSetNames\":[\"admin\"]}]}}" | jq '.id' )"
     - name: Cloud Run execution of Subject7 test
+      id: result
       run: |
-        echo ::set-output name=foo::"$(curl -X GET "https://platform.subject-7.com/api/v2/executions/${{steps.latestrelease.outputs.tag}}" -H  "accept: application/json" -H  "Authorization: Basic YW11dGhhOkBXU1gxcWF6" | jq '.id' )"
+        echo ::set-output name=foo::"$(curl -X GET "https://platform.subject-7.com/api/v2/executions/${{steps.executionset.outputs.tag}}" -H  "accept: application/json" -H  "Authorization: Basic YW11dGhhOkBXU1gxcWF6" | jq '.id' )"
     - name: Cloud Run status
       run: |
-        echo "The result is ${{steps.latestrelease.outputs.foo}}"
+        echo "The result is ${{steps.result.outputs.foo}}"
  
