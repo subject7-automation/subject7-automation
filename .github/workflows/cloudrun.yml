@@ -26,4 +26,4 @@ jobs:
   
     - name: Cloud Run
       run: |
-       echo "${{ steps.vars.output.id }}"
+       echo "${{ steps.exe.output.id }}"
