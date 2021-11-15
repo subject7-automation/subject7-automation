@@ -12,8 +12,6 @@ on:
 jobs:
  job-a:
     runs-on: ubuntu-latest
-    outputs:
-       id: ${{ steps.exe.outputs.id }}
     steps:
     - name: Cloud Run execution of Subject7 test cases
       id: vars
