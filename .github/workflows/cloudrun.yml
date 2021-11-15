@@ -15,7 +15,8 @@ jobs:
       id: result
       run: |
         echo ::set-output name=foo::"$(curl -X GET "https://platform.subject-7.com/api/v2/executions/${{steps.executionset.outputs.tag}}" -H  "accept: application/json" -H  "Authorization: Basic YW11dGhhOkBXU1gxcWF6" | jq '.executionStatus' )"
-        sleep 5
+    - name: Sleep for 60 seconds
+      run: sleep 60s
     - name: Cloud Run status
       run: |
         echo "The result is ${{steps.result.outputs.foo}}"
